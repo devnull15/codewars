@@ -1,0 +1,31 @@
+def tickets(people):
+    print(people) #DEBUG
+    
+    vasyaCash = {"25":0, "50":0, "100":0} # Vasya's Cash
+    cost = 25 # cost of a ticket
+    
+    for cash in people:
+        # 1) Calculate change due:
+        changeDue = cash - cost
+        print("1) changeDue = " + str(changeDue))
+        
+        # 2) Does Vasya have the appropriate bill?
+        if changeDue is 25 and vasyaCash["25"] is 0: return "NO"
+        if changeDue is 75 and vasyaCash["50"] is 0:
+            if vasyaCash["25"] < 3: return "NO"
+        if changeDue is 75 and vasyaCash["50"] is not 0:
+            if vasyaCash["25"] is 0: return "NO"
+        print("2) Vasya has: " + str(vasyaCash)) #DEBUG
+            
+        # 3) give change
+        if changeDue is 25: vasyaCash["25"] -= 1
+        if changeDue is 75:
+            if vasyaCash["50"] > 0:
+                vasyaCash["50"] -= 1
+                vasyaCash["25"] -= 1
+            else: vasyaCash["25"] -= 3
+        print("3) Vasya gave change and now has: " + str(vasyaCash)) #DEBUG
+            
+        # 4) pocket the bill
+        vasyaCash[str(cash)] += 1
+        print("4) Vasya sold a ticket and now has: " + str(vasyaCash)) #DEBUG
