@@ -1,0 +1,27 @@
+def longest_consec(strarr, k):
+    
+    n = len(strarr)
+
+    # 0) Base case
+    if n is 0 or k > n or k <= 0: return ""
+    
+    # 1) loop through strarr for the length of array
+    i = 0
+    maxLen = 0
+    retstr = ""
+    #print(n) #DEBUG
+    for i in xrange(0, n):
+        # 2) start at index i and contatenate the next k strings together
+        curstr = ""
+        for j in xrange(i, k+i):
+            try: curstr += strarr[j]
+            except IndexError: pass
+            # 3) if length of string is the logest, then save
+            if len(curstr) > maxLen:
+                retstr = curstr
+                maxLen = len(curstr)
+            #print("curstr = " + curstr) #DEBUG
+        
+
+        
+    return retstr
