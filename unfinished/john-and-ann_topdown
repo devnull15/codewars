@@ -1,0 +1,63 @@
+def john(n):
+    jret = [None] * n
+    john_r(n,jret)
+    return jret
+
+
+def john_r(n, jret):
+    #DEBUG
+    print("[john " + str(n) + "]: jret is " + str(jret))
+    #DEBUG
+    
+    # base case
+    if n is 0:
+        jret[n] = 0
+      
+        #DEBUG
+        print("[john " + str(n) + "]: BASE CASE jret is " + str(jret))
+        #DEBUG
+        
+        return
+
+    jret[n] = n-ann(john(n-1)[-1])[-1]
+    
+    #DEBUG
+    print("[john " + str(n) + "]: jret is " + str(jret))
+    #DEBUG
+    
+    return
+    
+def ann(n):
+    aret = [None] * n
+    ann_r(n,aret)
+    return aret
+
+
+def ann_r(n, aret):
+    #DEBUG
+    print("[ann " + str(n) + "]: aret is " + str(aret))
+    #DEBUG
+    
+    # base case
+    if n is 0:
+        aret[n] = 1
+      
+        #DEBUG
+        print("[ann " + str(n) + "]: BASE CASE aret is " + str(aret))
+        #DEBUG
+        
+        return
+
+    aret[n] = n-john(ann(n-1)[-1])[-1]
+    
+    #DEBUG
+    print("[ann " + str(n) + "]: aret is " + str(aret))
+    #DEBUG
+    
+    return
+    
+def sum_john(n):
+    return sum(john(n))
+    
+def sum_ann(n):
+    return sum(ann(n))
