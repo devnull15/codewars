@@ -1,60 +1,79 @@
 def john(n):
+    global jret 
+    global aret
+    
+    if n is 0: return [0]
+    
     jret = [None] * n
-    john_r(n,jret)
+    aret = [None] * n
+    john_r(n-1)
     return jret
 
 
-def john_r(n, jret):
+def john_r(n):
+    global jret
+    
     #DEBUG
-    print("[john " + str(n) + "]: jret is " + str(jret))
+    #print("[john " + str(n) + "]: jret is " + str(jret))
     #DEBUG
     
-    # base case
-    if n is 0:
-        jret[n] = 0
-      
-        #DEBUG
-        print("[john " + str(n) + "]: BASE CASE jret is " + str(jret))
-        #DEBUG
+    # 0) check to see if jret is set
+    if jret[n] is None:
         
-        return
-
-    jret[n] = n-ann(john(n-1)[-1])[-1]
-    
+        # 1) if it is not, then check if this is the base case
+        if n <= 0:
+            #DEBUG
+            #print("[john " + str(n) + "]: BASE CASE jret is " + str(jret))
+            #DEBUG
+            jret[0] = 0
+            
+        # 2) if it is not the base case, then compute:
+        else: jret[n] = n-ann_r(john_r(n-1))
+        
     #DEBUG
-    print("[john " + str(n) + "]: jret is " + str(jret))
+    #print("[john " + str(n) + "]: jret is " + str(jret))
     #DEBUG
     
-    return
+    return jret[n]
     
 def ann(n):
+    global jret 
+    global aret
+    
+    if n is 0: return [1]
+    
+    jret = [None] * n
     aret = [None] * n
-    ann_r(n,aret)
+    ann_r(n-1)
     return aret
 
 
-def ann_r(n, aret):
+def ann_r(n):
+    global aret
+    
     #DEBUG
-    print("[ann " + str(n) + "]: aret is " + str(aret))
+    #print("[ann " + str(n) + "]: aret is " + str(aret))
     #DEBUG
     
-    # base case
-    if n is 0:
-        aret[n] = 1
-      
-        #DEBUG
-        print("[ann " + str(n) + "]: BASE CASE aret is " + str(aret))
-        #DEBUG
+    # 0) check to see if jret is set
+    if aret[n] is None:
         
-        return
+        # 1) if it is not, then check if this is the base case
+        if n <= 0:
+            #DEBUG
+            #print("[ann " + str(n) + "]: BASE CASE aret is " + str(aret))
+            #DEBUG
+            aret[0] = 1
+            
+        # 2) if it is not the base case, then compute:
+        else: aret[n] = n-john_r(ann_r(n-1))
+        
+    #DEBUG
+    #print("[john " + str(n) + "]: aret is " + str(aret))
+    #DEBUG
+    
+    return aret[n]
 
-    aret[n] = n-john(ann(n-1)[-1])[-1]
-    
-    #DEBUG
-    print("[ann " + str(n) + "]: aret is " + str(aret))
-    #DEBUG
-    
-    return
     
 def sum_john(n):
     return sum(john(n))
